@@ -1,4 +1,4 @@
-name: Build ubuntu image
+name: Build alpine image
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         # Name of the Docker image
         image: wukongcloud/bind9 
         # Tags override for Docker image, Comma separated docker image tags (see Tagging the image with GitOps)
-        tags: 9.16-ubuntu,9.16,ubuntu,latest
+        tags: 9.16-alpine,alpine
         # Target Docker registry
         registry: docker.io
         # Location of Dockerfile, if not Dockerfile in root directory
