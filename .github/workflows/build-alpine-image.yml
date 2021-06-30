@@ -1,0 +1,41 @@
+name: Build ubuntu image
+
+on:
+  push:
+    branches: 
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker Build & Push Action
+      # You may pin to the exact commit or the version.
+      # uses: mr-smithers-excellent/docker-build-push@b74f2665a4a826412bdb4c355deb6fdc2e80d42b
+      uses: mr-smithers-excellent/docker-build-push@v5.5
+      with:
+        # Name of the Docker image
+        image: wukongcloud/bind9 
+        # Tags override for Docker image, Comma separated docker image tags (see Tagging the image with GitOps)
+        tags: 9.16-ubuntu,9.16,ubuntu,latest
+        # Target Docker registry
+        registry: docker.io
+        # Location of Dockerfile, if not Dockerfile in root directory
+        dockerfile: ./alpine/Dockerfile
+        # Directory to run `docker build` from, if not project root
+        directory: ./alpine/
+        # Docker build arguments passed via --build-arg
+        # buildArgs: # optional
+        # Docker build labels passed via --label
+        # labels: # optional
+        # Docker build target passed via --target
+        # target: # optional
+        # Docker registry username
+        username: ${{ secrets.DOCKER_USERNAME }}
+        # Docker registry password
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        # GitHub organization to push image to (if not current)
+        gitHubOrg: wukongcloud # optional
+        # Adds latest tag to auto-generated GitOps tag
+        addLatest: true # optional, default is false
